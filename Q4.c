@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,6 +14,18 @@ typedef struct Stack {
 } Stack;
 
 // Function to create a new node
+Node* createNode(int data) {
+    Node* newNode = (Node*) malloc(sizeof(Node));
+    if (!newNode) {
+        printf("Memory error\n");
+        return NULL;
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a node at the end of the list
 void insertAtEnd(Node** head, int data) {
     Node* newNode = createNode(data);
     if (*head == NULL) {
@@ -23,18 +36,7 @@ void insertAtEnd(Node** head, int data) {
             temp = temp->next;
         }
         temp->next = newNode;
-       
     }
-}
-Node* createNode(int data) {
-    Node* newNode = (Node*) malloc(sizeof(Node));
-    if (!newNode) {
-        printf("Memory error\n");
-        return NULL;
-    }
-    newNode->data = data;
-    newNode->next = NULL;
-    return newNode;
 }
 
 // Function to initialize a stack
@@ -83,14 +85,17 @@ int top(Stack* stack) {
 int main() {
     Stack stack;
     initStack(&stack);
- int n;
- printf("%d",&n);
- for(int i=0;i<n;i++){
-    printf("enter stack elements :");
-    int p;
-    scanf("%d",&p);
-    insertAtEnd(&stack,p);
- }
+
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    for(int i = 0; i < n; i++) {
+        printf("Enter stack element %d: ", i + 1);
+        int p;
+        scanf("%d", &p);
+        push(&stack, p); // Use push instead of insertAtEnd
+    }
 
     printf("Top element: %d\n", top(&stack));
     printf("Popped element: %d\n", pop(&stack));
