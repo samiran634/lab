@@ -21,6 +21,7 @@ void insertAtBeginning(Node** head, int data) {
         *head = newNode;
     } else {
         newNode->next = *head;
+        (*head)->prev=newNode;
         *head = newNode;
     }
 }
@@ -37,13 +38,13 @@ void insertAtEnd(Node** head, int data) {
         newNode->prev=temp;
     }
 }
-void printListReverse(Node* head) {
-    Node* temp = head;
+void printListReverse(Node** head) {
+    Node* temp = *head;
     while (temp->next != NULL) {
         temp = temp->next;
     }
     while (temp != NULL) {
-        printf("%d <-> ", temp->data);
+        printf("%d ", temp->data);
         temp = temp->prev;
     }
     printf("NULL\n");
@@ -80,7 +81,8 @@ int main(){
         printf("%d ", temp->data);
         temp = temp->next;
     }
-    printf("After reversing the Linked list:");
+    printf("\n");
+    printf("After reversing the Linked list:\n");
     printListReverse(&head);
     return 0;
 }

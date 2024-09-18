@@ -12,8 +12,6 @@ typedef struct Node {
 typedef struct Stack {
     Node* top;
 } Stack;
-
-// Function to create a new node
 Node* createNode(int data) {
     Node* newNode = (Node*) malloc(sizeof(Node));
     if (!newNode) {
@@ -24,8 +22,6 @@ Node* createNode(int data) {
     newNode->next = NULL;
     return newNode;
 }
-
-// Function to insert a node at the end of the list
 void insertAtEnd(Node** head, int data) {
     Node* newNode = createNode(data);
     if (*head == NULL) {
@@ -38,8 +34,6 @@ void insertAtEnd(Node** head, int data) {
         temp->next = newNode;
     }
 }
-
-// Function to initialize a stack
 void initStack(Stack* stack) {
     stack->top = NULL;
 }
@@ -89,17 +83,43 @@ int main() {
     int n;
     printf("Enter the number of elements: ");
     scanf("%d", &n);
-
     for(int i = 0; i < n; i++) {
         printf("Enter stack element %d: ", i + 1);
         int p;
         scanf("%d", &p);
         push(&stack, p); // Use push instead of insertAtEnd
     }
-
-    printf("Top element: %d\n", top(&stack));
-    printf("Popped element: %d\n", pop(&stack));
-    printf("Top element: %d\n", top(&stack));
+ 
+    printf("enter 0 to cheak if stack is empty of not \n");
+    printf("enter 1 for a element to push in stack \n");
+    printf("enter 2 to pop element from stack \n");
+    printf("enter 3 to get the top element of stack \n");
+    printf("enter any other key to exit.\n");
+  
+ 
+    while(1){
+        int p;
+        scanf("%d",&p);
+        if(p==0){
+           int flag=isEmpty(&stack);
+            if(flag==1)printf("stack is empty");
+            else printf("stack is not empty");
+        }
+        else if(p==1){
+            int data;
+            printf("enter data that you want to be inserted:");
+            scanf("%d",&data);
+            push(&stack,data);
+        }
+        else if(p==2){
+            pop(&stack);
+        }
+        else if(p==3){
+            int t=top(&stack);
+            printf("%d",t);
+        }
+        else break;
+    }
 
     return 0;
 }
